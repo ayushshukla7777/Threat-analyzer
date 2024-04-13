@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Set OpenAI API key\
 
 # API key from rohit@trustedweartech.com , being used as default
-openai.api_key = "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"
+openai.api_key =""
 
 # A key to pe passed with the requests to authenticate them
 auth_key = 'Gn1TVEY49iCiLNBizXQyzJwqoMbSq1ra'
