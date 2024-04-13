@@ -1,0 +1,69 @@
+#This is a cofig file for API Gateway Configuration
+#paste this code in online editor of swagger to understand the api better
+
+
+swagger: "2.0"
+info:
+  title: "chat-gpt-api"
+  description: "API Gateway for ChatGPT service running on Cloud Run"
+  version: "1.0.0"
+schemes:
+  - "https"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+x-google-backend:
+  address: https://chat-gpt-3-5-n3totyy5fa-el.a.run.app
+paths:
+  /answer:
+    post:
+      summary: "Ask a question and get an answer from ChatGPT"
+      description: "Takes a question in string format and returns the answer from ChatGPT"
+      operationId: "answerQuestion"
+      produces:
+        - "application/json"
+      parameters:
+        - name: task 
+          in: body
+          description: task object
+          required: true
+          schema:
+            $ref: '#/definitions/Task'
+      
+      
+      responses:
+        200:
+          description: "Answer from ChatGPT"
+          schema:
+            type: "object"
+            properties:
+              answer:
+                type: "string"
+  /:
+    get:
+      summary: "Default route"
+      description: "Returns a default message"
+      operationId: "defaultRoute"
+      responses:
+        200:
+          description: "Default message"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "Welcome to the ChatGPT API! \n ©Private Property of Trustedwear Tech. \n Contact rohit@trustedweartech.com for any queries..."
+definitions:
+  Task:
+    description: Task object
+    properties:
+      question:
+        type: string
+        description: The question to be answered
+      auth:
+        type: string
+        description: Enter the auth Key for access
+    required:
+      - question
+      - auth
